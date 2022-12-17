@@ -23,13 +23,15 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
     <!-- CSS Files -->
     <link href="assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
-    <!-- CSS Just for demo purpose, don't include it in your project -->
-    <link href="assets/demo/demo.css" rel="stylesheet" />
+
   </head>
+   <style><?php 
+    include("./style.css");
+  ?></style>
 
   <body class="dark-edition">
     <div class="wrapper ">
-      <div class="sidebar" data-color="purple" data-background-color="black" data-image="assets/img/sidebar-2.jpg">
+      <div class="sidebar" data-color="orange" data-background-color="black" data-image="assets/img/sidebar-2.jpg">
         <!--
           Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
 
@@ -78,10 +80,7 @@
               <form class="navbar-form">
                 <div class="input-group no-border">
                   <input type="text" value="" class="form-control" placeholder="Search...">
-                  <button type="submit" class="btn btn-default btn-round btn-just-icon">
-                    <i class="material-icons">search</i>
-                    <div class="ripple-container"></div>
-                  </button>
+                  <div class="ripple-container"></div>
                 </div>
               </form>
               <ul class="navbar-nav">
@@ -106,7 +105,13 @@
           </div>
         </nav>
         <!-- End Navbar -->
+        <div id="maTable">
+          <?php 
+            require("./table.php");
+          ?>
+        </div>
       </div>
     </div>
   </body>
 </html>
+
