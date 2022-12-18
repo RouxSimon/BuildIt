@@ -7,6 +7,7 @@
 
 =========================================================
 -->
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -51,13 +52,13 @@
             <li class="nav-item ">
               <a class="nav-link" href="./user.php">
                 <i class="material-icons">person</i>
-                <p>User Profile</p>
+                <p>Gestion des utilisateurs</p>
               </a>
             </li>
             <li class="nav-item ">
-              <a class="nav-link" href="./icons.php">
+              <a class="nav-link" href="./table_management/table_list.php">
                 <i class="material-icons">bubble_chart</i>
-                <p>Icons</p>
+                <p>Gestion des tables</p>
               </a>
             </li>
           </ul>

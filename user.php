@@ -71,16 +71,8 @@
 
 
 <?php
-    // Connexion à la base de données
-    $host = "localhost";
-    $user = "root";
-    $password = "";
-    $dbname = "buildit";
-
-    $conn = mysqli_connect($host, $user, $password, $dbname);
-    if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-    }
+  // Inclusion du fichier de connexion à la base de données
+  include 'db.php';
 
   // Vérifiez que les données du tableau sont envoyées en POST
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
