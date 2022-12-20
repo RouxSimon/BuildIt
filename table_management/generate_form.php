@@ -9,7 +9,11 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/buidIt/BuildIt/db.php';
 <body class="bg-dark text-light">
     <?php
     // Récupération du nom de la table sélectionnée
-    $table_name = $_POST['table_name'];
+    if(isset($_POST['table_name'])){
+        $table_name = $_POST['table_name'];
+    } else {
+        $table_name = $_GET['table_name'];
+    }
     if (isset($_POST['delete'])) {
         $query = "DROP TABLE $table_name";
         if (mysqli_query($conn, $query)) {
@@ -60,24 +64,51 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/buidIt/BuildIt/db.php';
         ?>
         <br>&nbsp&nbsp<a href="table_list.php" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Retour</a>
         <div class="container mt-5">
-            <h3 class="text-center">Remplissez la table <?php echo $table_name; ?> :</h3><?php
-            echo '<form action="submit_form.php" method="post" class="mx-auto w-50">';
-                while ($row = mysqli_fetch_array($result)) {
-                    // Vérification du type de colonne
-                    if (($row['Type'] == 'varchar(255)' || $row['Type'] == 'int(11)') &&  $row['Field']!='id') {
-                        // Affichage du champ de texte si le type de colonne est "VARCHAR" ou "INT"
-                        echo '<div class="form-group">';
-                        echo '<label for="' . $row['Field'] . '">' . $row['Field'] . '</label>';
-                        echo '<input type="text" class="form-control" id="' . $row['Field'] . '" name="' . $row['Field'] . '">';
-                        echo '</div>';
-                    }
-                }
-                echo '<input type="hidden" name="table_name" value="' . $table_name . '">';
+            <h3 class="text-center">Remplissez la table <?php echo $table_name; ?> :</h3>
             
-                // Affichage du bouton de soumission
-                echo '<button type="submit" class="btn btn-primary">Envoyer</button>';
-            echo '</form>';
-        echo '</div>';
+            <form action="submit_form.php" method="post" class="control-label col-sm-12">
+                <?php while ($row = mysqli_fetch_array($result)) { ?>
+                    <?php if (($row['Type'] == 'varchar(255)' || $row['Type'] == 'int(11)') &&  $row['Field']!='id') { ?>
+                        <!-- Affichage du champ de texte si le type de colonne est "VARCHAR" ou "INT" -->
+                        <div class="form-group">
+                            <label for="<?php echo $row['Field']; ?>"><?php echo $row['Field']; ?></label>
+                            <input type="text" class="form-control" id="<?php echo $row['Field']; ?>" name="<?php echo $row['Field']; ?>">
+                        </div>
+                    <?php } ?>
+                <?php } ?>
+                <input type="hidden" name="table_name" value="<?php echo $table_name; ?>">
+                <!-- Affichage du bouton de soumission -->
+                <button type="submit" class="btn btn-primary">Envoyer</button><br>
+            </form><br>
+
+            <h3 class="text-center">Ajouter une colonne :</h3>
+
+            <form action="add_column.php" method="post" class="form-horizontal">
+                <input type="hidden" name="table_name" value="<?php echo $table_name; ?>">
+                <div class="form-group">
+                    <label for="column_name" class="control-label col-sm-2">Nom de la colonne :</label>
+                    <div class="col-sm-12">
+                        <input type="text" class="form-control" name="column_name" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="data_type" class="control-label col-sm-2">Type de données :</label>
+                    <div class="col-sm-12">
+                        <select name="data_type" class="form-control">
+                            <option value="int">INT</option>
+                            <option value="varchar(255)">VARCHAR</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-12">
+                        <button type="submit" name="add_column" class="btn btn-success"><i class="fas fa-plus"></i> Ajouter colonne</button>
+                    </div>
+                </div>
+            </form>
+            
+        </div>
+        <?php
     }
 echo '<body class="bg-dark">';
 

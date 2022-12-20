@@ -1,10 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
-
-#maTable {
-    margin: 0 auto; /* centre la table dans la page */
-    width: 90% !important;
-    margin-top: 15%;
-
-    font-family: 'Roboto', sans-serif;
-    color: #ffffff !important;
-}
+/* Styles du bouton de connexion/déconnexion */
+.btn {
+    background-color: #333; /* Couleur de fond du bouton */
+    color: #fff; /* Couleur du texte du bouton */
+    border-radius: 5px; /* Bords arrondis du bouton */
+    font-size: 14px; /* Taille de police du texte du bouton */
+  }
+  
+  /* Styles du modal de connexion */
+  .modal {
+    background-color: rgba(0, 0, 0, 0.5); /* Couleur de fond semi-transparente du modal */
+  }
+  
+  /* Styles de la page en mode sombre */
+  .dark-edition {
+    background-color: #222; /* Couleur de fond de la page */
+    color: rgb(0, 0, 0); /* Couleur du texte de la page */
+  }
+  

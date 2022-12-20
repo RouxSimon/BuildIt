@@ -16,9 +16,9 @@ $result = mysqli_query($conn, "SHOW TABLES");
 <!-- Affichage du formulaire -->
 <body class="bg-dark text-light">
     <br>&nbsp&nbsp<a href="../index.php" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Retour</a>
-        <div class="container mt-5">
-            <h3>Sélectionnez une table ou créez une nouvelle :</h3><br>
-            <form action="generate_form.php" method="post" class="form-inline">
+    <div class="container mt-5">
+        <h3>Sélectionnez une table ou créez en une nouvelle :</h3><br>
+        <form action="generate_form.php" method="post" class="form-inline">
             <div class="form-group mb-2">
                 <select name="table_name" class="form-control">
                 <option value="">Créer une nouvelle table</option>
