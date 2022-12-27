@@ -4,7 +4,7 @@
 <title>Ajout de table</title>
 
 <?php
-// Inclusion de la classe TableGenerator
+// Inclusion de la bdd
 require_once $_SERVER['DOCUMENT_ROOT'].'/buidIt/BuildIt/db.php';
 
 // Récupération de la liste des tables
