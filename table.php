@@ -75,7 +75,7 @@ $result = mysqli_query($conn, $sql);
 <?php
 // Bouton d'import de fichiers Excel
 ?>
-<form action="import.php" method="post" enctype="multipart/form-data">
+<form action="import_excel.php" method="post" enctype="multipart/form-data">
   <input type="file" name="file" />
   <input type="submit" name="import" value="Import Excel" />
 </form>
