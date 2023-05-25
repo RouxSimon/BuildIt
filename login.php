@@ -26,9 +26,12 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 
     // Redirigez l'utilisateur vers la page de connexion
     header('Location: index.php');
+    exit;
     
   } else {
-    // Connexion échouée, affichez un message d'erreur
-    echo '<p class="error">Nom d\'utilisateur ou mot de passe incorrect</p>';
+    // Connexion échouée, stockez l'erreur dans la variable de session et redirigez vers la page de connexion
+    $_SESSION['login_error'] = true;
+    header('Location: index.php');
+    exit;
   }
 }
