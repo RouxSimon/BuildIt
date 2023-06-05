@@ -37,39 +37,38 @@
             <li class="nav-item">
               <a class="nav-link" href="add_module.php">Ajout de module</a>
             </li>
-          </ul>
-        </div>
-        <!-- Bouton de connexion/déconnexion -->
-        <?php
-          // L'utilisateur est connecté, affichez un bouton de déconnexion
-          if (isset($_SESSION['user_id'])) {   
-
-            // Récupérer les modules de l'utilisateur connecté (remplacez l'ID de l'utilisateur si nécessaire)
-            $userId = $_SESSION['user_id'];
-            $query = "SELECT DISTINCT m.*
-                      FROM users u
-                      JOIN user_roles ur ON u.id = ur.user_id
-                      JOIN roles r ON ur.role_id = r.id
-                      JOIN modules m ON r.name = m.droits OR r.name = ''
-                      WHERE u.id = $userId";
-            $result = mysqli_query($conn, $query);
-
-            // Parcourir les résultats et afficher les modules dans la navbar
-            while ($row = mysqli_fetch_assoc($result)) {
-              $moduleName = $row['name'];
-
-              echo '<li class="nav-item">';
-              echo '<a class="nav-link" href="new_modules/' . $moduleName . '.php">' . $moduleName . '</a>';
-              echo '</li>';
-            }
-
-            ?><span class="welcome-message" style="color: white; margin-left: 10px;">Bonjour, <?php echo $_SESSION['username']; ?></span>&nbsp&nbsp&nbsp<?php
-            echo '<a href="logout.php" class="btn btn-dark">Se déconnecter</a>';
-          } else {
-            // L'utilisateur n'est pas connecté, affichez un bouton de connexion
-            echo '<a href="#" class="btn btn-dark" data-toggle="modal" data-target="#loginModal">Se connecter</a>';
-          }          
-        ?>
+            <!-- Bouton de connexion/déconnexion -->
+            <?php 
+              if (isset($_SESSION['user_id'])) {  
+                $userId = $_SESSION['user_id'];        
+                // Récupérer les modules de l'utilisateur connecté (remplacez l'ID de l'utilisateur si nécessaire)
+                $query = "SELECT DISTINCT m.*
+                          FROM users u
+                          JOIN user_roles ur ON u.id = ur.user_id
+                          JOIN roles r ON ur.role_id = r.id
+                          JOIN modules m ON r.name = m.droits OR r.name = ''
+                          WHERE u.id = $userId";
+                $result = mysqli_query($conn, $query);
+                          
+                // Parcourir les résultats et afficher les modules dans la navbar
+                while ($row = mysqli_fetch_assoc($result)) {
+                  $moduleName = $row['name'];
+                  echo '<li class="nav-item">';
+                  echo '<a class="nav-link" href="new_modules/' . $moduleName . '.php">' . str_replace("_", " ", $moduleName) . '</a>';
+                  echo '</li>';
+                }
+                // L'utilisateur est connecté, affichez un bouton de déconnexion
+                echo "</ul>
+                </div>";
+                ?><span class="welcome-message" style="color: white; margin-left: 10px;">Bonjour, <?php echo $_SESSION['username']; ?></span>&nbsp&nbsp&nbsp<?php
+                echo '<a href="logout.php" class="btn btn-dark">Se déconnecter</a>';
+              } else {
+                // L'utilisateur n'est pas connecté, affichez un bouton de connexion
+                echo "</ul>
+                </div>";
+                echo '<a href="#" class="btn btn-dark" data-toggle="modal" data-target="#loginModal">Se connecter</a>';
+              }          
+            ?>
 
         <!-- Modal de connexion -->
         <div class="modal fade login-modal" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
